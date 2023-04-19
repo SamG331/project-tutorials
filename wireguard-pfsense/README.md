@@ -6,6 +6,10 @@ This tutorial is mainly built for individuals that want a secure way to access t
 
 In terms of ways to access your homelab resources outside your network, there are other options to chose from including [Cloudflare Tunnels](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps) and [Guacamole](https://guacamole.apache.org/doc/gug/introduction.html). I recommend that you check out each to decide which will be best for your own use case.
 
+
+![MacOS Setup](https://github.com/SamG331/project-tutorials/wireguard-pfsense/assets/blob/main/WireGuard-Logo-Background.png?raw=true)
+
+
 ---
 
 ## Prerequisites
