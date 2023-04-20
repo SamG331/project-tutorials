@@ -14,15 +14,15 @@ In terms of ways to access your homelab resources outside your network, there ar
 
 ## Table of Contents
 - [Requirements](#Requirements)
-- [1. Server Configuration](#1. Server Configuration)
-	- [[#1.  Server Configuration#1.1. Install WireGuard package on pfSense|1.1. Install WireGuard package on pfSense]]
-	- [[#1.  Server Configuration#1.2. Configure WireGuard Firewall Rules|1.2. Configure WireGuard Firewall Rules]]
-	- [[#1.  Server Configuration#1.3. Make WireGuard Tunnel|1.3. Make WireGuard Tunnel]]
-	- [[#1.  Server Configuration#1.4. Configure WAN Firewall Rules|1.4. Configure WAN Firewall Rules]]
-	- [[#1.  Server Configuration#1.5. Configure Outbound NAT|1.5. Configure Outbound NAT]]
-- [2. Peer Configuration](#pc)
-- [3. Testing & Troubleshooting|3. Testing & Troubleshooting](#tt)
-- [[#Additional Notes|Additional Notes]]
+- [1. Server Configuration](#1.)
+	- [1.1. Install WireGuard package on pfSense](#1.1)
+	- [1.2. Configure WireGuard Firewall Rules](#1.2)
+	- [1.3. Make WireGuard Tunnel](#1.3)
+	- [1.4. Configure WAN Firewall Rules](#1.4)
+	- [1.5. Configure Outbound NAT](#1.5)
+- [2. Peer Configuration](#2.)
+- [3. Testing & Troubleshooting](#3.)
+- [Additional Notes](#an)
 
 
 
@@ -33,14 +33,17 @@ In terms of ways to access your homelab resources outside your network, there ar
 - pfSense CE 2.5.2 & later OR pfSense Plus 21.05 & later
 
 ---
+<a name="1."/>
 
-## 1. Server Configuration
+## 1. Server Configuration 
 
 First we need to install and configure Wireguard on out pfSense router/firewall applicance. This process will set up encryption keys for our server running on pfSense as well as configure rules to allow WireGuard traffic from set IPs and ports.
+<a name="1.1"/>
 
-### 1.1. Install WireGuard package on pfSense
+### 1.1. Install WireGuard package on pfSense 
 
 In the pfSense webConfigurator, go to **System > Package Manager > Available Packages** and install the WireGuard package 
+<a name="1.2"/>
 
 ### 1.2. Configure WireGuard Firewall Rules
 
@@ -57,7 +60,8 @@ Add a new rule at the top:
 
 *If we miss this step you will find that our firewall will default to blocking all traffic on our Wireguard interface because of the way pfSense is set up to block all traffic when no firewall rules are in place
 
-### 1.3. Make WireGuard Tunnel
+
+### <a name="1.3"/> 1.3. Make WireGuard Tunnel
 
 Now we want to actually create to tunnel that will encrypt our traffic using WireGuard. This can be done in the webConfigurator as well and the setting we want are under **VPN > WireGuard**
 
@@ -73,7 +77,7 @@ Add Tunnel:
 - click **Generate** to generate public and private key pairs
 - set **Interface Addresses** to a custom private IPv4 designation (example: `172.16.16.1 /24`)
 
-### 1.4. Configure WAN Firewall Rules
+### 1.4. Configure WAN Firewall Rules <a name="1.4"/>
 
 Now, importantly, we need to pass traffic through our new custom port to our WAN interface. For the sake of this tutorial I will continue using `51480` thoughout.
 
@@ -86,7 +90,7 @@ Add a new rule at the bottom:
 - set **Destination Port Range** to `51480 to 51480`
 **Description** - *Allow WireGuard*
 
-### 1.5. Configure Outbound NAT
+### 1.5. Configure Outbound NAT <a name="1.5"/>
 
 Now there are other ways to handle NAT with WireGuard which include creating a dedicated interface for your specific WireGuard Tunnel. In this case we will configure an Outbound Nat rule in order to allow WireGuard to go out the WAN
 
@@ -139,7 +143,7 @@ Add Peer:
 
 ---
 
-## 3. Testing & Troubleshooting <a name="tt"></a>
+## 3. Testing & Troubleshooting <a name="tt"/>
 
 WireGuard is pretty quiet as far as VPN protocols go, there won't be alarms going off or many visible system errors if things are not configured properly. The way that we have this config set up, as a split tunnel, we want to make sure DNS is working from out remote network and our internal network.
 
@@ -161,7 +165,7 @@ ssh root@web-server.yourlocalnetwork
 
 ---
 
-## Additional Notes
+## Additional Notes <a name="an"/>
 
 Since this tutorial was setting up a split tunnel config, if you would like a more "locked down" version where all traffic is routed through your HomeNetwork, you should go with a full tunnel config. PfSense has a [WIreGuard Recipe](https://docs.netgate.com/pfsense/en/latest/recipes/wireguard-client.html#) that will walk you through this process.
 
