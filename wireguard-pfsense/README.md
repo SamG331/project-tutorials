@@ -13,15 +13,15 @@ In terms of ways to access your homelab resources outside your network, there ar
 ---
 
 ## Table of Contents
-- [[#Requirements|Requirements]]
-- [[#1.  Server Configuration|1.  Server Configuration]]
+- [Requirements](#Requirements)
+- [1. Server Configuration](#1. Server Configuration)
 	- [[#1.  Server Configuration#1.1. Install WireGuard package on pfSense|1.1. Install WireGuard package on pfSense]]
 	- [[#1.  Server Configuration#1.2. Configure WireGuard Firewall Rules|1.2. Configure WireGuard Firewall Rules]]
 	- [[#1.  Server Configuration#1.3. Make WireGuard Tunnel|1.3. Make WireGuard Tunnel]]
 	- [[#1.  Server Configuration#1.4. Configure WAN Firewall Rules|1.4. Configure WAN Firewall Rules]]
 	- [[#1.  Server Configuration#1.5. Configure Outbound NAT|1.5. Configure Outbound NAT]]
-- [[#2. Peer Configuration|2. Peer Configuration]]
-- [[#3. Testing & Troubleshooting|3. Testing & Troubleshooting]]
+- [2. Peer Configuration](#pc)
+- [3. Testing & Troubleshooting|3. Testing & Troubleshooting](#tt)
 - [[#Additional Notes|Additional Notes]]
 
 
@@ -34,7 +34,7 @@ In terms of ways to access your homelab resources outside your network, there ar
 
 ---
 
-## 1.  Server Configuration
+## 1. Server Configuration
 
 First we need to install and configure Wireguard on out pfSense router/firewall applicance. This process will set up encryption keys for our server running on pfSense as well as configure rules to allow WireGuard traffic from set IPs and ports.
 
@@ -102,7 +102,7 @@ Add Mapping:
 
 ---
 
-## 2. Peer Configuration
+## 2. Peer Configuration <a name="pc"/>
 
 Finally, we can now start adding and configuring "Peers" to our WireGuard server. In this example I am going to use MacOS client as my peer, but the process is nearly identical regardless or the device or OS.
 
@@ -139,7 +139,7 @@ Add Peer:
 
 ---
 
-## 3. Testing & Troubleshooting
+## 3. Testing & Troubleshooting <a name="tt"></a>
 
 WireGuard is pretty quiet as far as VPN protocols go, there won't be alarms going off or many visible system errors if things are not configured properly. The way that we have this config set up, as a split tunnel, we want to make sure DNS is working from out remote network and our internal network.
 
