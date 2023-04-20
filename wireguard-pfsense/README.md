@@ -12,7 +12,23 @@ In terms of ways to access your homelab resources outside your network, there ar
 
 ---
 
-## Prerequisites
+## Table of Contents
+- [[#Requirements|Requirements]]
+- [[#1.  Server Configuration|1.  Server Configuration]]
+	- [[#1.  Server Configuration#1.1. Install WireGuard package on pfSense|1.1. Install WireGuard package on pfSense]]
+	- [[#1.  Server Configuration#1.2. Configure WireGuard Firewall Rules|1.2. Configure WireGuard Firewall Rules]]
+	- [[#1.  Server Configuration#1.3. Make WireGuard Tunnel|1.3. Make WireGuard Tunnel]]
+	- [[#1.  Server Configuration#1.4. Configure WAN Firewall Rules|1.4. Configure WAN Firewall Rules]]
+	- [[#1.  Server Configuration#1.5. Configure Outbound NAT|1.5. Configure Outbound NAT]]
+- [[#2. Peer Configuration|2. Peer Configuration]]
+- [[#3. Testing & Troubleshooting|3. Testing & Troubleshooting]]
+- [[#Additional Notes|Additional Notes]]
+
+
+
+---
+
+## Requirements
 
 - pfSense CE 2.5.2 & later OR pfSense Plus 21.05 & later
 
@@ -127,7 +143,7 @@ Add Peer:
 
 WireGuard is pretty quiet as far as VPN protocols go, there won't be alarms going off or many visible system errors if things are not configured properly. The way that we have this config set up, as a split tunnel, we want to make sure DNS is working from out remote network and our internal network.
 
-### Tests:
+#### Tests:
 
 1) Connect to pfSense webConfigurator
 `http:pfsense.yourlocalnetwork:`
